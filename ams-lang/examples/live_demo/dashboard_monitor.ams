@@ -1,0 +1,61 @@
+GLOBAL:
+    PRINTLN("INFO: Initializing Dashboard Monitor")
+    LOG_SOURCE LIVE_LOG = OPEN LOG_SOURCE "live_app.log" READ MODE
+
+SOURCES:
+    SOURCE HEARTBEAT CHECK EVERY 2000 MS
+        PRINTLN("INFO: Heartbeat check...")
+    ;
+
+    SOURCE APPMONITOR CHECK EVERY 2000 MS
+        TRACK INT LAST_ERR_COUNT = 0
+        TRACK INT LAST_CRIT_COUNT = 0
+        TRACK INT LAST_SQL_COUNT = 0
+        TRACK INT LAST_AUTH_COUNT = 0
+        TRACK INT CHECK_ID = 0
+        
+        CHECK_ID = CHECK_ID + 1
+        
+        LOG_DATA ERRORS = LIVE_LOG.filter(byLevel(ERROR))
+        LOG_DATA CRITICAL = LIVE_LOG.filter(byLevel(FATAL))
+        LOG_DATA SQL_INJ = LIVE_LOG.match("SQL")
+        LOG_DATA AUTH_FAIL = LIVE_LOG.match("AUTH_FAIL")
+        
+        INT CURR_ERR = ERRORS.count()
+        INT CURR_CRIT = CRITICAL.count()
+        INT CURR_SQL = SQL_INJ.count()
+        INT CURR_AUTH = AUTH_FAIL.count()
+        
+        IF CURR_ERR > LAST_ERR_COUNT
+            PRINTLN("ERROR: Application error detected in log | RULE_TRIGGER: AppErrorDetect")
+            LAST_ERR_COUNT = CURR_ERR
+        ;
+        
+        IF CURR_CRIT > LAST_CRIT_COUNT
+            PRINTLN("CRITICAL: Fatal application crash detected! | RULE_TRIGGER: CrashDetect")
+            LAST_CRIT_COUNT = CURR_CRIT
+        ;
+        
+        IF CURR_SQL > LAST_SQL_COUNT
+            PRINTLN("CRITICAL: SQL Injection attempt blocked | RULE_TRIGGER: SQLInjection")
+            LAST_SQL_COUNT = CURR_SQL
+        ;
+        
+        IF CURR_AUTH > LAST_AUTH_COUNT
+            PRINTLN("WARN: Unauthorized access attempt (AUTH_FAIL) | RULE_TRIGGER: UnauthorizedAccess")
+            LAST_AUTH_COUNT = CURR_AUTH
+        ;
+        
+        SIGNAL (CURR_CRIT > LAST_CRIT_COUNT) | (CURR_SQL > LAST_SQL_COUNT)
+    ;
+
+EVENTS:
+    EVENT HIGHRISK_EVENT ON APPMONITOR
+        PRINTLN("CRITICAL: High risk security or stability event triggered!")
+        SIGNAL 1 > 0
+    ;
+
+OBSERVERS:
+    OBSERVER DASHBOARD_UPDATER OBSERVS HIGHRISK_EVENT
+        PRINTLN("INFO: Updating security dashboard with critical alerts.")
+    ;

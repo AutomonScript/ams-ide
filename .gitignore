@@ -1,0 +1,38 @@
+# Build artifacts
+ams-lang/build/
+*.exe
+*.obj
+*.o
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+IDE/server/.env
+
+# Logs (but keep example logs needed for demos)
+*.log
+!ams-lang/examples/**/*.log
+
+# IDE/Editor files
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Internal docs (not for public)
+agents.md
+projectdoc/
+fullstackproject.md
+IMPLEMENTATION_PLAN.md
+REFACTORING_SUMMARY.md
+AUTOMONSCRIPT.
+
+# Planning
+.planning/
+
+# Test artifacts
+test

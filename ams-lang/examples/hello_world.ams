@@ -1,0 +1,40 @@
+##
+Example : Printing "Hello World" in AutomonScript
+Basic AutomonScript Program to demonstrate Code Structure 
+and PRINT Message to Terminal using builtend functions.
+##
+
+GLOBAL:
+    BOOL trigger = true;
+    INT X = 11;
+    PRINT("Hello! ")
+    PRINTLN("WORLD")
+
+
+SOURCES:
+
+    SOURCE Hello_S
+        # SOURCE TRIGGER EVENT FOR CHECK ONLY WHEN TRACK VARIABLE CHANGES
+        # Hear dummy(force) update id done to trigger to view PRINT() in Events and Observers
+        trigger = !trigger;
+        PRINTLN("Hello! ","From SOURCE");
+        SIGNAL X>10
+    ;
+    
+
+EVENTS:
+    EVENT Hello_E ON Hello_S
+        SIGNAL TRUE
+        PRINTLN("Hello! ","From EVENT")
+    ;
+
+
+OBSERVERS:
+
+    OBSERVER Hello_O OBSERVS Hello_E
+        PRINTLN("Hello! ","From OBSERVER ","x 1")
+    ;
+
+     OBSERVER Hello_O2 OBSERVS Hello_E
+        PRINTLN("Hello! ","From OBSERVER ","x 2")
+    ;

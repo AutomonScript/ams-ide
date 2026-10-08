@@ -1,0 +1,31 @@
+2026-01-01T00:00:00.000Z INFO Application started
+2026-05-27T09:54:13.627Z INFO Page requested /home
+2026-05-27T09:54:16.632Z WARN High memory usage detected
+2026-05-27T09:54:19.632Z ERROR Null pointer exception in AuthManager
+2026-05-27T09:54:22.643Z ERROR SQL injection signature detected - DROP TABLE users
+2026-05-27T09:54:25.655Z INFO User logged in
+2026-05-27T09:54:28.662Z INFO Page requested /home
+2026-05-27T09:54:31.666Z ERROR Connection timeout on DB_POOL
+2026-05-27T09:54:34.670Z WARN Invalid credentials provided (AUTH_FAIL) from 192.168.1.5
+2026-05-27T09:54:37.677Z WARN High memory usage detected
+2026-05-27T09:54:40.678Z WARN Invalid credentials provided (AUTH_FAIL) from 192.168.1.5
+2026-05-27T09:54:43.684Z WARN Invalid credentials provided (AUTH_FAIL) from 10.0.0.99
+2026-05-27T09:54:46.687Z ERROR Null pointer exception in AuthManager
+2026-05-27T09:54:49.687Z WARN Invalid credentials provided (AUTH_FAIL) from 192.168.1.5
+2026-05-27T09:54:52.692Z ERROR SQL injection signature detected - DROP TABLE users
+2026-05-27T09:54:55.697Z ERROR SQL injection signature detected - DROP TABLE users
+2026-05-27T09:54:58.702Z WARN High memory usage detected
+2026-05-27T09:55:01.703Z WARN Invalid credentials provided (AUTH_FAIL) from 192.168.1.5
+2026-05-27T09:55:04.708Z WARN SQL syntax warning in query
+2026-05-27T09:55:07.712Z WARN High memory usage detected
+2026-05-27T09:55:10.715Z ERROR SQL injection signature detected - DROP TABLE users
+2026-05-27T09:55:13.718Z INFO Page requested /home
+2026-05-27T09:55:16.720Z WARN High memory usage detected
+2026-05-27T09:55:19.727Z INFO User logged in
+2026-05-27T09:55:22.741Z ERROR SQL injection signature detected - DROP TABLE users
+2026-05-27T09:55:25.746Z ERROR Connection timeout on DB_POOL
+2026-05-27T09:55:28.746Z WARN SQL syntax warning in query
+2026-05-27T09:55:31.750Z ERROR SQL injection signature detected - DROP TABLE users
+2026-05-27T09:55:34.754Z ERROR Connection timeout on DB_POOL
+2026-05-27T09:55:37.756Z ERROR Null pointer exception in AuthManager
+2026-05-27T09:55:40.771Z ERROR Null pointer exception in AuthManager
